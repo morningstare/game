@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>gameboard</title>
+</head>
+<style>
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+    }
+
+    #board-container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        gap: 5px;
+        width: 250px;
+    }
+
+    .span {
+        width: 100%;
+        height: 100%;
+    }
+
+    .board-cell {
+        border: 1px solid black;
+        background-color: lightgray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+    }
+    .game-over{
+        display: flex;justify-content: center;align-items: center;
+        background-color: silver;
+        color: white;
+        font-size: 3vw;
+        width: 400px;
+        height: 400px;
+    }
+
+    .win:after{
+        content: "finish";
+        display: flex;justify-content: center;align-items: center;
+        background-color: lightblue;
+        width: 100%;
+        height: 100%;
+        color: white;
+    }
+
+    .color{
+        background-color: lightgreen;
+    }
+</style>
+<body>
+<div id="board-container"></div>
+<script>
+
+
+    const boardContainer = document.getElementById('board-container');
+    const cells = [];
+
+    for (let i = 0; i < 20; i++) {
+        const cell = document.createElement('div');
+        // const image = document.createElement("span");
+        // // image.style.backgroundColor = "red";
+        // image.classList.add("span");
+        // // image.innerHTML = "saman";
+        // cell.appendChild(image);
+        cell.classList.add('board-cell');
+        cells.push(cell);
+        boardContainer.appendChild(cell);
+    }
+
+    cells[19].classList.add("win")
+
+
+    let currentPosition = 0; // شماره خانه فعلی عکس
+
+    cells[currentPosition].innerHTML = 'start';
+
+
+    // cells[dote].innerHTML = '<img src="Untitled-1.jpg">';
+    // for (let i = 0; i < 10; i++) {
+    //     const randomNumber = Math.floor(Math.random() * 10) + 1
+    //     cells[randomNumber].style.backgroundColor = "blue";
+    // }
+    function generateRandomNumbers(count, min, max) {
+        var numbers = [];
+
+        while (numbers.length < count) {
+            var random = Math.floor(Math.random() * (max - min )) + min;
+
+            if (!numbers.includes(random)) {
+                numbers.push(random);
+            }
+        }
+
+        return numbers;
+    }
+
+    function wineer(){
+        if (currentPosition === 19){
+            boardContainer.style.display = "none";
+            const win = document.createElement("div");
+            document.body.appendChild(win);
+            win.innerHTML = "winner:)";
+            win.classList.add("game-over");
+        }
+    }
+
+    var random = generateRandomNumbers(6, 4, 18);
+
+   cells[random[0]].classList.add("color")
+   cells[random[1]].classList.add("color")
+   cells[random[2]].classList.add("color")
+   cells[random[3]].classList.add("color")
+   cells[random[4]].classList.add("color")
+
+
+    function gameover(){
+        if (currentPosition === random[0] || currentPosition === random[1] || currentPosition === random[2] || currentPosition === random[3] || currentPosition === random[4]){
+            boardContainer.style.display = "none";
+            const game = document.createElement("div");
+            document.body.appendChild(game);
+            game.innerHTML = "game over:(";
+            game.classList.add("game-over");
+        }
+    }
+
+
+
+    // تابعی برای حرکت عکس به خانه‌ی مورد نظر
+    function moveImage(direction) {
+        switch (direction) {
+            case 'up':
+                if (currentPosition >= 5) {
+                    cells[currentPosition].innerHTML = '';
+                    currentPosition -= 5;
+                    cells[currentPosition].innerHTML = ':)';
+                    gameover()
+                    wineer()
+                }
+                break;
+            case 'down':
+                if (currentPosition < 15) {
+                    cells[currentPosition].innerHTML = '';
+                    currentPosition += 5;
+                    cells[currentPosition].innerHTML = ':)';
+                    gameover()
+                    wineer()
+                }
+                break;
+            case 'left':
+                if (currentPosition % 5 !== 0) {
+                    cells[currentPosition].innerHTML = '';
+                    currentPosition -= 1;
+                    cells[currentPosition].innerHTML = ':)';
+                    gameover()
+                    wineer()
+                }
+                break;
+            case 'right':
+                if ((currentPosition + 1) % 5 !== 0) {
+                    cells[currentPosition].innerHTML = '';
+                    currentPosition += 1;
+                    cells[currentPosition].innerHTML = ':)';
+                    gameover()
+                    wineer()
+                }
+                break;
+        }
+    }
+
+    // ثبت رویداد کلیک دکمه‌های جهت‌دهی
+    document.addEventListener('keydown', function (event) {
+        const key = event.keyCode;
+        switch (key) {
+            case 37: // Left arrow key
+                moveImage('left');
+                break;
+            case 38: // Up arrow key
+                moveImage('up');
+                break;
+            case 39: // Right arrow key
+                moveImage('right');
+                break;
+            case 40: // Down arrow key
+                moveImage('down');
+                break;
+        }
+    });
+
+    console.log(currentPosition)
+    console.log(random)
+
+
+</script>
+</body>
+</html>
