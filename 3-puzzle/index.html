@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <img
+      src="assets/sample-2.jpg"
+      alt=""
+      style="display: none"
+      id="sample-image"
+    />
+    <section id="initial-screen">
+      <h1>Choose an Image</h1>
+      <input
+        type="file"
+        name="image"
+        id="image"
+        required
+        accept="image/jpeg,image/jpg,image/png"
+      />
+    </section>
+    <section id="app" style="display: none">
+      <div id="board">
+        <div class="slot--wrap">
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+        </div>
+        <!-- <div class="puzzles--wrap"></div> -->
+      </div>
+    </section>
+
+    <script src="app/main.js"></script>
+  </body>
+</html>
