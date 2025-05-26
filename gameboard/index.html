@@ -87,7 +87,7 @@
     cells[19].classList.add("win")
 
 
-    let currentPosition = 0; // شماره خانه فعلی عکس
+    let currentPosition = 0; 
 
     cells[currentPosition].innerHTML = 'start';
 
@@ -142,7 +142,7 @@
 
 
 
-    // تابعی برای حرکت عکس به خانه‌ی مورد نظر
+  
     function moveImage(direction) {
         switch (direction) {
             case 'up':
@@ -184,7 +184,7 @@
         }
     }
 
-    // ثبت رویداد کلیک دکمه‌های جهت‌دهی
+  
     document.addEventListener('keydown', function (event) {
         const key = event.keyCode;
         switch (key) {
